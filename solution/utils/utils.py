@@ -39,3 +39,15 @@ def to_iso3(country):
     except:
         return pd.NA
 
+#status
+WATCH_STATUS_COLS = ["watching", "completed", "on_hold", "dropped", "plan_to_watch"]
+
+WATCH_STATUS_LABELS = {
+    "watching": "Watching",
+    "completed": "Completed",
+    "on_hold": "On Hold",
+    "dropped": "Dropped",
+    "plan_to_watch": "Plan to Watch"
+}
+
+WATCH_STATUS_ORDER = ["Watching", "Completed", "On Hold", "Dropped", "Plan to Watch"]
