@@ -1,4 +1,5 @@
-# Assignment HCI per l’anno accademico 2025–2026
+# Evoluzione degli Anime nel tempo
+## Assignment HCI per l’anno accademico 2025–2026
 
 ### Giulia Zenoni, Kledisa Teqja
 
@@ -7,15 +8,6 @@ L’obiettivo di questo progetto è la realizzazione di un sistema in grado di s
 
 Per il progetto viene fornito un insieme di dati, organizzato in file **CSV**, che descrive diversi aspetti degli anime nel tempo.
 
----
-
-## Requisiti
-Lo scopo del lavoro è offrire a fan e giornalisti la possibilità di **accedere, esplorare e comprendere i dati sugli anime**.  
-È richiesto di progettare uno o più **Jupyter Notebook** che permettano di:
-
-- pulire i dati (*data cleaning*),
-- analizzarli,
-- visualizzarli in modo efficace.
 
 ---
 
@@ -44,13 +36,39 @@ L’obiettivo è creare uno o più **Jupyter Notebook** che consentano a fan e g
 Il progetto deve essere strutturato con un approccio **user-centric**, tenendo conto delle esigenze degli utenti finali.  
 Alcuni esempi di analisi possibili includono:
 
--
--
--
--
-- 
+- **Evoluzione storica della produzione**: quanti anime vengono prodotti e come si distribuiscono per genere nel tempo
+- **Confronto tra produzione e grandimento**: i generi più prodotti sono anche quelli più apprezzati dai fan?
+- **Popolarità vs qaulità percepita**: un anime molto seguito non è necessariamente quello con rating più altro
+- **Comportamento degli utenti**: quali soo i titoli completati, abbandonati, pianificati
+- **COmmunity Globale**: dove si contrano geograficamente gli utenti e come cresce la community nel tempo
+- **Industria e professioni**: chi lavora nell'industria anime, da quali apesi provengono
 
 ---
+## Struttura del notebook
+Il notebook **sotrytelling.ipynd** racconta l'ecosistema anime in 10 Capitoli:
+1. **La crescita della produzione**
+2. **Dalla produzione alla valutazione**
+3. **Le origini narrative**
+4. **Popolarità e impatto culturale**
+5. **I personaggi**
+6. **I doppiatori e le lingue**
+7. **Community anime nel mondo**
+8. **Persone e ruoli nell'industria**
+9. **Come sono seguiti gli anime**
+10. **Il pubblico target**
+
+---
+
+## Requisiti
+Lo scopo del lavoro è offrire a fan e giornalisti la possibilità di **accedere, esplorare e comprendere i dati sugli anime**.  
+È richiesto di progettare uno o più **Jupyter Notebook** che permettano di:
+
+- pulire i dati (*data cleaning*)
+- analizzarli
+- visualizzarli in modo efficace.
+
+---
+
 
 ## Build
 
