@@ -39,13 +39,13 @@ Alcuni esempi di analisi possibili includono:
 - **Evoluzione storica della produzione**: quanti anime vengono prodotti e come si distribuiscono per genere nel tempo
 - **Confronto tra produzione e grandimento**: i generi più prodotti sono anche quelli più apprezzati dai fan?
 - **Popolarità vs qaulità percepita**: un anime molto seguito non è necessariamente quello con rating più altro
-- **Comportamento degli utenti**: quali soo i titoli completati, abbandonati, pianificati
-- **COmmunity Globale**: dove si contrano geograficamente gli utenti e come cresce la community nel tempo
+- **Comportamento degli utenti**: quali sono i titoli completati, abbandonati, pianificati
+- **Community Globale**: dove si contrano geograficamente gli utenti e come cresce la community nel tempo
 - **Industria e professioni**: chi lavora nell'industria anime, da quali apesi provengono
 
 ---
 ## Struttura del notebook
-Il notebook **sotrytelling.ipynd** racconta l'ecosistema anime in 10 Capitoli:
+Il notebook **sotrytelling.ipynb** racconta l'ecosistema anime in 11 Capitoli:
 1. **La crescita della produzione**
 2. **Dalla produzione alla valutazione**
 3. **Le origini narrative**
@@ -56,6 +56,7 @@ Il notebook **sotrytelling.ipynd** racconta l'ecosistema anime in 10 Capitoli:
 8. **Persone e ruoli nell'industria**
 9. **Come sono seguiti gli anime**
 10. **Il pubblico target**
+11. **Conclusione**
 
 ---
 
