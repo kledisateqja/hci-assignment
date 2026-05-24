@@ -13,6 +13,15 @@ def parse_genres(x):
         return ast.literal_eval(x)
     except:
         return []
+# funzione per conertire in stringa
+def parse_list_column(x):
+
+        if isinstance(x, list):
+            return x
+        try:
+            return ast.literal_eval(x)
+        except:
+            return []
 
 #where is the anime community concentrated e Countries with at Least One Person in the Credits
 
