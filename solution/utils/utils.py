@@ -67,6 +67,33 @@ def compute_anime_type_counts(details, main_types):
     counts = counts.sort_values(['year', 'type'])
     return counts
 
+# Calcola la matrice delle distribuzioni percentuali di voto per fascia di punteggio
+def compute_score_band_matrix(details, df_stats):
+    score_cols = df_stats.filter(regex=r"^score_\d+_votes$").columns.tolist()
+    loved = (details.merge(df_stats[["mal_id"] + score_cols], on="mal_id")
+                    .dropna(subset=["score"] + score_cols))
+    loved["score_band"] = pd.cut(loved["score"], bins=[1, 6, 8, 10],
+                                 labels=["Basso (1–6)", "Medio (6–8)", "Alto (8–10)"])
+    band_counts = loved["score_band"].value_counts()
+    loved_pct = loved[score_cols].div(loved[score_cols].sum(axis=1), axis=0) * 100
+    loved_pct["score_band"] = loved["score_band"].values
+    matrix = loved_pct.groupby("score_band", observed=True)[score_cols].mean().reset_index()
+    matrix_melted = matrix.melt(id_vars="score_band", var_name="voto", value_name="percentuale")
+    matrix_melted["voto"] = matrix_melted["voto"].str.split("_").str[1].astype(int)
+    return matrix_melted, band_counts
+
+# Calcola il voto medio per fascia di raccomandazioni ricevute
+def compute_rec_score_summary(data):
+    bins = [0, 5, 20, 50, float('inf')]
+    tier_labels = ['1–5', '6–20', '21–50', '51+']
+    data['rec_tier'] = pd.cut(data['n_recs'], bins=bins, labels=tier_labels)
+    summary = (data.groupby('rec_tier', observed=True)['avg_score']
+                   .agg(media='mean', n_anime='count')
+                   .reset_index())
+    summary['etichetta'] = summary.apply(
+        lambda r: f"{r['media']:.2f} ({int(r['n_anime'])} anime)", axis=1)
+    return summary
+
 #where is the anime community concentrated e Countries with at Least One Person in the Credits
 
 COUNTRY_FIX = {
