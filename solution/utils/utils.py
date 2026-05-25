@@ -1,9 +1,6 @@
 import pandas as pd
 import pycountry
 import ast
-import seaborn as sns
-import matplotlib.pyplot as plt
-import colorsys
 
 #anime production over time by genre
 def parse_genres(x):

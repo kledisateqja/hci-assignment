@@ -1,11 +1,8 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-import matplotlib.gridspec as gridspec
-import seaborn as sns
 import numpy as np
 import plotly.graph_objects as go
-import ast
-import plotly.express as px
+
 
 # Prepara i dati per il pie chart: top N generi + aggregazione "Other"
 def get_pie_data(genre_total, top_n=12):
