@@ -23,6 +23,50 @@ def parse_list_column(x):
         except:
             return []
 
+# Calcola la media pesata del punteggio per anno con media mobile a 5 anni
+def compute_year_weighted(df_weighted):
+    year_weighted = df_weighted.groupby('year', group_keys=False).apply(
+        lambda x: pd.Series({
+            'weighted_mean': (x['score'] * x['scored_by']).sum() / x['scored_by'].sum(),
+            'total_votes': x['scored_by'].sum(),
+            'anime_count': len(x)
+        }),
+        include_groups=False).reset_index()
+    year_weighted = year_weighted.sort_values('year')
+    year_weighted['rolling_weighted'] = year_weighted['weighted_mean'].rolling(
+        window=5, center=True, min_periods=2).mean()
+    return year_weighted
+
+
+# Calcola la percentuale di produzione e preferenze fan per genere, restituisce formato long per plotly
+def compute_genre_compare(genres_df, favs):
+    production = genres_df['genres'].value_counts()
+    production_pct = production / production.sum() * 100
+
+    favs_genres = pd.merge(favs, genres_df[['mal_id', 'genres']], on='mal_id', how='inner')
+    favs_count = favs_genres['genres'].value_counts()
+    favs_pct = favs_count / favs_count.sum() * 100
+
+    compare = pd.DataFrame({'Produzione': production_pct,
+                            'Preferenze fan': favs_pct}).dropna()
+    compare = compare.sort_values('Produzione', ascending=False)
+
+    compare_long = (compare.rename_axis('Genere').reset_index()
+                    .melt(id_vars='Genere', var_name='Tipo', value_name='Percentuale'))
+    return compare_long
+
+
+# Conta gli anime per ogni combinazione anno+tipo, riempie i vuoti con 0 per il grafico animato
+def compute_anime_type_counts(details, main_types):
+    counts = (details.groupby(['year', 'type']).size().reset_index(name='count'))
+    all_combinations = pd.MultiIndex.from_product(
+        [counts['year'].unique(), main_types], names=['year', 'type'])
+    counts = (counts.set_index(['year', 'type'])
+                    .reindex(all_combinations, fill_value=0)
+                    .reset_index())
+    counts = counts.sort_values(['year', 'type'])
+    return counts
+
 #where is the anime community concentrated e Countries with at Least One Person in the Credits
 
 COUNTRY_FIX = {
