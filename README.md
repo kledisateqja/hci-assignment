@@ -70,6 +70,44 @@ Lo scopo del lavoro è offrire a fan e giornalisti la possibilità di **accedere
 
 ---
 
+## Struttura del progetto
+
+```
+hci-assignment/
+│
+├── dataset/                        # Cartella dati (da creare manualmente, non in git)
+│   ├── raw/                        # File CSV originali da caricare qui
+│   └── cleaned/                    # File CSV puliti, generati dai notebook di pulizia
+│
+├── solution/
+│   ├── pulizia/                    # Notebook di data cleaning (uno per file CSV)
+│   │   ├── characters.ipynb
+│   │   ├── character_nicknames.ipynb
+│   │   ├── clean_character_anime_works.ipynb
+│   │   ├── clean_person_alternate_names.ipynb
+│   │   ├── clean_person_anime_works.ipynb
+│   │   ├── clean_person_details.ipynb
+│   │   ├── clean_person_voice_works.ipynb
+│   │   ├── clean_profiles.ipynb
+│   │   ├── details.ipynb
+│   │   ├── favs.ipynb
+│   │   ├── ratings.ipynb
+│   │   ├── recommendations.ipynb
+│   │   └── stats.ipynb
+│   │
+│   ├── notebook/
+│   │   └── storytelling.ipynb      # Notebook principale: analisi e visualizzazioni
+│   │
+│   └── utils/
+│       ├── charts.py               # Funzioni di supporto per la creazione dei grafici
+│       └── utils.py                # Funzioni di utilità condivise
+│
+├── README.md
+└── .gitignore
+```
+
+---
+
 
 ## Build
 
@@ -112,6 +150,35 @@ A questo punto è possibile:
 
 Dopo aver riavviato l’IDE, l’ambiente sarà attivo e pronto all’uso.
 
+## Run
 
+Segui i passaggi in ordine per avviare correttamente il progetto.
 
+### 1. Creare la struttura delle cartelle
+
+Prima di tutto, crea la cartella `dataset` nella root del progetto con le due sottocartelle necessarie:
+
+```bash
+mkdir -p dataset/raw
+mkdir -p dataset/cleaned
+```
+
+- `dataset/raw` -> conterrà i file CSV originali (dati grezzi)
+- `dataset/cleaned` -> verrà popolata automaticamente dai notebook di pulizia
+
+### 2. Caricare i dati grezzi
+
+Copia i file `.csv` originali del dataset all'interno della cartella `dataset/raw`.  
+Assicurati che tutti i file elencati nella sezione [Dataset](#dataset) siano presenti prima di procedere.
+
+### 3. Eseguire i notebook di pulizia
+
+Apri ed esegui **tutti i notebook** (`.ipynb`) presenti nella cartella `solution/pulizia/`.  
+Questi notebook si occupano di pulire e normalizzare i dati, producendo i file `.csv` elaborati nella cartella `dataset/cleaned/`.
+
+> Questo passaggio è obbligatorio: il notebook di analisi e storytelling dipende dai file puliti generati qui.
+
+### 4. Aprire il notebook principale
+
+Una volta completata la pulizia, apri ed esegui il notebook **`storytelling.ipynb`**.
 
