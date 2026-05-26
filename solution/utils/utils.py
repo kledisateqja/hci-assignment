@@ -134,3 +134,33 @@ WATCH_STATUS_LABELS = {
 }
 
 WATCH_STATUS_ORDER = ["Watching", "Completed", "On Hold", "Dropped", "Plan to Watch"]
+
+#Personaggi principlai vs Secondari
+def build_character_popularity(df_characters_anime_works, df_characters):
+    labels = {"Main": "Personaggi principali", "Supporting": "Personaggi secondari"}
+    character_popularity = (
+        df_characters_anime_works
+        .loc[lambda df: df["role"].isin(["Main", "Supporting"]), ["character_mal_id", "role"]]
+        .drop_duplicates()
+        .groupby("character_mal_id")
+        .filter(lambda x: x["role"].nunique() == 1)
+        .drop_duplicates("character_mal_id")
+        .merge(df_characters[["character_mal_id", "favorites"]], on="character_mal_id")
+    )
+    character_popularity["role_group"] = character_popularity["role"].replace(labels)
+    character_popularity["has_favorites"] = character_popularity["favorites"] > 0
+    return character_popularity
+
+
+# Calcola la tabella di distribuzione e popolarità per personaggi principali e secondari
+def compute_character_tables(character_popularity, order):
+    main_support_table = (character_popularity
+                          .groupby("role_group")["character_mal_id"]
+                          .nunique().reindex(order))
+    popularity_table = (character_popularity
+                        .groupby("role_group")
+                        .agg(total=("character_mal_id", "nunique"),
+                             with_favourites=("has_favorites", "sum"))
+                        .reindex(order))
+    popularity_table["share"] = (popularity_table["with_favourites"] / popularity_table["total"] * 100).round(1)
+    return main_support_table, popularity_table

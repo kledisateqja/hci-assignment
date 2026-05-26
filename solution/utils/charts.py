@@ -112,3 +112,17 @@ def label_horizontal_bars(bars, totals):
             bar.get_y() + bar.get_height() / 2,
             f"{val / 1_000_000:.2f}M", va="center", fontsize=10
         )
+
+
+# Applica lo stile bianco grassetto alle percentuali del pie chart dei personaggi
+def style_character_autotexts(autotexts):
+    for t in autotexts:
+        t.set_color("white")
+        t.set_fontweight("bold")
+
+
+# Aggiunge le etichette percentuali sopra ogni barra del bar chart
+def label_bars(bars, totals):
+    for bar, val in zip(bars, totals):
+        h = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2, h + 1, f"{h:.1f}%", ha="center", fontsize=10)
